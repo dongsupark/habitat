@@ -24,6 +24,18 @@ www_url          = "http://$APP_HOSTNAME/#/sign-in"
 
 EOT
 
+mkdir -p /hab/svc/builder-api-proxy
+cat <<EOT > /hab/svc/builder-api-proxy/user.toml
+app_url = "http://localhost:9636"
+
+[github]
+url = "$GITHUB_API_URL"
+web_url = "$GITHUB_WEB_URL"
+client_id = "$GITHUB_CLIENT_ID"
+client_secret = "$GITHUB_CLIENT_SECRET"
+app_id = 5629
+EOT
+
 mkdir -p /hab/svc/builder-jobsrv
 cat <<EOT > /hab/svc/builder-jobsrv/user.toml
 [datastore]
@@ -322,7 +334,15 @@ EOT
 
 mkdir -p /hab/svc/builder-worker
 cat <<EOT > /hab/svc/builder-worker/user.toml
-auth_token = "$GITHUB_CLIENT_SECRET"
-bldr_url = "http://$APP_HOSTNAME:9636"
+auth_token = "${HAB_AUTH_TOKEN}"
 auto_publish = true
+log_level = "debug"
+airlock_enabled = false
+
+[github]
+url = "$GITHUB_API_URL"
+web_url = "$GITHUB_WEB_URL"
+client_id = "$GITHUB_CLIENT_ID"
+client_secret = "$GITHUB_CLIENT_SECRET"
+app_id = 5629
 EOT

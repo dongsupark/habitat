@@ -2,8 +2,9 @@
 # vi: set ft=ruby :
 
 $script = <<SCRIPT
-cd /vagrant
+cd /src
 sh support/linux/install_dev_0_ubuntu_latest.sh
+echo 'eval "$(direnv hook bash)"' >> /root/.bashrc
 echo 'eval "$(direnv hook bash)"' >> /home/vagrant/.bashrc
 apt-get install -y direnv
 sh components/hab/install.sh
@@ -13,6 +14,8 @@ Vagrant.configure("2") do |config|
   config.vm.box = "bento/ubuntu-17.04"
   config.vm.provision "shell", inline: $script, privileged: true
 
+  config.vm.synced_folder ".", "/src", nfs: true, :linux__nfs_options => ["no_root_squash"], :map_uid => 0, :map_gid => 0
+  config.vm.synced_folder "~/.hab", "/root/.hab", nfs: true, :linux__nfs_options => ["no_root_squash"], :map_uid => 0, :map_gid => 0
   config.vm.synced_folder "~/.hab", "/home/vagrant/.hab", nfs: true, :linux__nfs_options => ["no_root_squash"], :map_uid => 0, :map_gid => 0
 
   config.vm.network "forwarded_port", guest: 80, host: 9636

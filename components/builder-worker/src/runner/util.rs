@@ -56,12 +56,12 @@ pub fn validate_integrations(workspace: &Workspace) -> Result<()> {
         }
 
         let prj_integration = prj_integrations.first().unwrap();
-        if prj_integration.get_integration() != "docker" {
-            return Err(Error::InvalidIntegrations(format!(
-                "integration '{}' not supported",
-                prj_integration.get_integration()
-            )));
-        }
+        // if prj_integration.get_integration() != "docker" {
+        //     return Err(Error::InvalidIntegrations(format!(
+        //         "integration '{}' not supported",
+        //         prj_integration.get_integration()
+        //     )));
+        // }
         if prj_integration.get_integration_name() != "default" {
             return Err(Error::InvalidIntegrations(format!(
                 "integration name '{}' not supported",
@@ -139,18 +139,19 @@ pub fn validate_integrations(workspace: &Workspace) -> Result<()> {
             )));
         }
         let org_integration = org_integrations.first().unwrap();
+        // TED TODO: Amazon will go here soon.cat
         if org_integration.get_integration() != "docker" {
             return Err(Error::InvalidIntegrations(format!(
                 "origin integration '{}' not supported",
                 org_integration.get_integration()
             )));
         }
-        if org_integration.get_name() != "docker" {
-            return Err(Error::InvalidIntegrations(format!(
-                "origin integration name '{}' not supported",
-                org_integration.get_name()
-            )));
-        }
+        // if org_integration.get_name() != "docker" {
+        //     return Err(Error::InvalidIntegrations(format!(
+        //         "origin integration name '{}' not supported",
+        //         org_integration.get_name()
+        //     )));
+        // }
         // TODO fn: use a struct and serde to do heavy lifting
         let creds: JsonValue = match serde_json::from_str(org_integration.get_body()) {
             Ok(json) => json,
@@ -218,17 +219,9 @@ pub fn docker_exporter_spec(workspace: &Workspace) -> DockerExporterSpec {
             .expect("Project integrations must not be empty")
             .get_body(),
     ).expect("Project integrations body must be JSON");
-    let custom_tag = match opts.get("custom_tag") {
-        Some(val) => {
-            let val = val.as_str().expect("custom_tag value is a string");
-            if val.is_empty() {
-                None
-            } else {
-                Some(val.to_string())
-            }
-        }
-        None => None,
-    };
+    let custom_tag = get_optional_args(&opts, String::from("custom_tag"));
+    let registry_url = get_optional_args(&creds, String::from("registry_url"));
+    let registry_type = get_optional_args(&opts, String::from("integration"));
 
     DockerExporterSpec {
         username: creds
@@ -243,6 +236,8 @@ pub fn docker_exporter_spec(workspace: &Workspace) -> DockerExporterSpec {
             .as_str()
             .expect("password value is a string")
             .to_string(),
+        registry_type: registry_type,
+        registry_url: registry_url,
         docker_hub_repo_name: opts.get("docker_hub_repo_name")
             .expect("docker_hub_repo_name key is present")
             .as_str()
@@ -261,5 +256,20 @@ pub fn docker_exporter_spec(workspace: &Workspace) -> DockerExporterSpec {
             .as_bool()
             .expect("version_release_tag value is a bool"),
         custom_tag: custom_tag,
+    }
+}
+
+fn get_optional_args(opts: &JsonValue, arg: String) -> Option<String> {
+    let is_string = format!("{} value is a string", arg);
+    match opts.get(arg) {
+        Some(key) => {
+            let key = key.as_str().expect(&is_string);
+            if key.is_empty() {
+                None
+            } else {
+                Some(key.to_string())
+            }
+        }
+        None => None,
     }
 }
