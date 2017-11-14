@@ -1,0 +1,31 @@
+hab-checking-input {
+  display: block;
+  margin: $default-margin 0;
+
+  .wrapper {
+    position: relative;
+
+    input {
+      margin-bottom: $default-margin / 2;
+    }
+
+    hab-icon {
+      position: absolute;
+      top: 50%;
+      right: $default-margin / 2;
+      transform: translateY(-50%);
+    }
+  }
+
+  .spinning {
+    color: $waiting;
+  }
+
+  .invalid {
+    color: $error;
+  }
+
+  .valid {
+    color: $success;
+  }
+}

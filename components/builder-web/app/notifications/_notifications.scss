@@ -22,7 +22,7 @@
   z-index: 9999;
 
   li {
-    @include dropdown-panel;
+    @include shadow-panel;
     border-left: 4px solid $light-gray;
     display: block;
     margin: $small-spacing 0;

@@ -1,56 +1,38 @@
 hab-project-settings {
-  @include row;
 
-  h3 {
-    text-transform: uppercase;
-    font-size: rem(12);
+  p.note {
+    display: flex;
+    margin-top: 0;
+    padding: $default-padding;
+    background-color: $very-light-gray;
+    border-radius: $default-radius;
+    color: $dark-blue;
+
+    hab-icon {
+      margin-right: $default-margin;
+      width: 24px;
+      height: 24px;
+    }
+
+    span {
+
+      &.info {
+        margin-right: $default-margin;
+      }
+
+      &.cta {
+        text-align: center;
+      }
+    }
   }
 
-  p {
-    font-size: rem(14);
-    margin: 8px 0 12px;
-
-    &.note {
-      @include row;
-      position: relative;
-      margin-top: 0;
-      padding: 14px;
-      background-color: $very-light-gray;
-      border-radius: $global-radius;
-      color: $dark-blue;
-      margin-bottom: 18px;
-
-      hab-icon {
-        @include span-columns(1);
-        width: 24px;
-        height: 24px;
-        color: $dark-gray;
-      }
-
-      span {
-        @include span-columns(8);
-
-        &.cta {
-          @include span-columns(3);
-          text-align: center;
-
-          .mat-raised-button {
-            background-color: $hab-orange;
-            color: $hab-white;
-          }
-        }
-      }
-    }
-
-    code {
-      font-family: $monospace-font-family;
-      font-size: rem(12);
-    }
+  code {
+    font-family: $monospace-font-family;
+    font-size: $small-font-size;
   }
 
   .connect {
-    margin-bottom: $base-spacing;
-    font-size: rem(14);
+    margin-bottom: $default-margin;
 
     .no-keys {
       color: $hab-blue;
@@ -70,27 +52,27 @@ hab-project-settings {
   .connected-plans {
 
     li {
-      @include row;
+      // @include row;
 
       &.heading {
         border-bottom: 1px solid $very-light-gray;
       }
 
       &.item {
-        font-size: rem(12);
-        padding: 12px 0;
+        font-size: $small-font-size;
+        padding: $default-padding 0;
       }
 
       .plan-path {
-        @include span-columns(6);
+        // @include span-columns(6);
 
         hab-icon {
-          margin-right: 12px;
+          margin-right: $default-margin;
         }
       }
 
       .plan-exports, .plan-status, .plan-actions {
-        @include span-columns(2);
+        // @include span-columns(2);
       }
 
       .plan-actions {
@@ -118,7 +100,7 @@ hab-project-settings {
           width: 18px;
 
           &.success {
-            color: $hab-green-light;
+            color: $success;
           }
         }
 
@@ -133,9 +115,9 @@ hab-project-settings {
 
     ol {
       background-color: $hab-blue;
-      border-radius: $global-radius;
-      color: $hab-white;
-      font-size: rem(14);
+      border-radius: $default-radius;
+      color: $white;
+      // font-size: rem(14);
       padding: 4px 14px;
       margin-bottom: 28px;
 
@@ -157,27 +139,6 @@ hab-project-settings {
             margin-right: 12px;
           }
         }
-      }
-    }
-
-    hab-checking-input {
-
-      small {
-        text-align: left;
-        display: block;
-        margin-bottom: 12px;
-        font-size: rem(12);
-
-        span {
-          margin-left: 0;
-        }
-      }
-
-      hab-icon {
-        top: 12px;
-        right: 10px;
-        width: 16px;
-        height: 16px;
       }
     }
 
@@ -216,6 +177,6 @@ hab-project-settings {
   }
 
   .content {
-    @include span-columns(9);
+    // @include span-columns(9);
   }
 }

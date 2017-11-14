@@ -1,5 +1,5 @@
 .dialog {
-  color: $hab-gray-dark;
+  color: $hab-text;
 
   section {
 
@@ -27,6 +27,15 @@
         margin-right: 18px;
         cursor: pointer;
       }
+    }
+  }
+
+  .controls {
+    margin-top: $default-margin;
+
+    a {
+      margin-left: $default-margin;
+      cursor: pointer;
     }
   }
 }

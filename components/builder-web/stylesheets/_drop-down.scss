@@ -12,21 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.hab-drop-down {
-  position: relative;
-  white-space: nowrap;
+// .hab-drop-down {
+//   position: relative;
+//   white-space: nowrap;
 
 
-  ul {
-    @include dropdown-panel;
-    position: absolute;
-    top: $base-spacing;
-  }
-}
+//   ul {
+//     @include shadow-panel;
+//     position: absolute;
+//     top: $default-spacing;
+//   }
+// }
 
-.actions--menu {
-  @extend .hab-drop-down;
-  right: 0;
-  top: rem(30);
-  z-index: 100;
-}
+// .actions--menu {
+//   @extend .hab-drop-down;
+//   right: 0;
+//   top: rem(30);
+//   z-index: 100;
+// }

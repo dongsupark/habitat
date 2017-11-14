@@ -1,0 +1,47 @@
+$black: #000;
+$white: #FFF;
+$off-white: #F8F9F9;
+$dark-blue: #283C4C;
+$medium-blue: #556F84;
+$light-blue: #e9f1f7;
+$dark-gray: #5C6670;
+$medium-gray: #C3C6C8;
+$light-gray: #D8D8D8;
+$very-light-gray: #E8F0F6;
+
+$hab-red: #EB6852;
+$hab-yellow: #EBE269;
+$hab-green: #87B09A;
+$hab-orange: #FF9012;
+$hab-blue: #4296B4;
+
+$hab-text: $dark-gray;
+$hab-links: $hab-green;
+$hab-borders: 1px solid $very-light-gray;
+
+$docker-blue: #0792E9;
+$google-blue: #4285F4;
+$amazon-orange: #FF9900;
+$azure-blue: #00ABEC;
+
+$active: $hab-orange;
+$success: $hab-green;
+$pending: $hab-blue;
+$waiting: $medium-gray;
+$warn: $hab-yellow;
+$error: $hab-red;
+
+$status-colors: (
+  complete: $success,
+  dispatched: $active,
+  processing: $active,
+  pending: $pending,
+  failed: $error,
+  rejected: $error
+);
+
+$form-colors: (
+  waiting: $waiting,
+  success: $success,
+  error: $error
+);

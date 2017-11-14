@@ -1,48 +1,12 @@
-.hab-search-results {
+.search-results {
 
-  li {
-    position: relative;
-    cursor: pointer;
-    font-size: rem(12);
-
-    a {
-      display: block;
-      transition: all 0.6s;
-      background-blend-mode: overlay;
-      border: 1px solid $hab-blue-light;
-      border-radius: $global-radius;
-      margin-bottom: 0.5em;
-      padding: $small-spacing $small-spacing * 1.5;
-      color: $hab-gray-dark;
-      font-family: $base-font-family;
-      font-size: rem(16);
-
-      &:hover, &.active {
-        transform: scale(1.01);
-        transition: all 0.2s ease-in-out;
-        box-shadow: 0 1px 14px 0 $hab-blue-light;
-      }
-
-      hab-icon[symbol="chevron-right"] {
-        @include chevron-right;
-        display: none;
-      }
-
-      &:hover {
-
-        hab-icon[symbol="chevron-right"] {
-          display: block;
-        }
-      }
+  .nav-list {
+    .item {
+      padding: 14px 16px;
 
       .name {
-        font-weight: bold;
+        font-size: 16px;
       }
     }
-  }
-
-  div > p {
-    font-size: rem(14);
-    font-weight: bold;
   }
 }

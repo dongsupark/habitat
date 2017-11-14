@@ -1,37 +1,25 @@
-<div class="hab-build-list">
-  <ol>
-    <li class="heading">
-      <div class="version">
-        <h5>Version</h5>
-      </div>
-      <div class="count">
-        <h5>Name</h5>
-      </div>
-      <div class="created">
-        <h5>Created</h5>
-      </div>
-      <div class="status">
-      </div>
-    </li>
-    <li class="none" *ngIf="!builds || builds.size === 0">
-      <p>
-        <strong>There are no available build jobs for this package.</strong>
-      </p>
-    </li>
-    <li class="item" *ngFor="let build of builds" (click)="onClick(build)">
-      <div class="version">
-        {{ build.version || "&mdash;" }}
-      </div>
-      <div class="count">
-        {{ build.origin }} / {{ build.name }}
-      </div>
-      <div class="created">
-        {{ dateFor(build.created_at) }}
-      </div>
-      <div class="icons">
-        <hab-icon [symbol]="iconFor(build.state)" class="status {{ build.state | lowercase }}" title="{{ build.state | titlecase }}"></hab-icon>
-        <hab-icon symbol="chevron-right"></hab-icon>
-      </div>
-    </li>
-  </ol>
-</div>
+<ol class="nav-list">
+  <li class="heading">
+    <h4>Version</h4>
+    <h4>Name</h4>
+    <h4>Created</h4>
+  </li>
+  <li class="none" *ngIf="!builds || builds.size === 0">
+    <span>There are no available build jobs for this package.</span>
+  </li>
+  <li class="item" *ngFor="let build of builds" (click)="onClick(build)">
+    <span class="column name">
+      {{ build.version || "&mdash;" }}
+    </span>
+    <span class="column">
+      {{ build.origin }} / {{ build.name }}
+    </span>
+    <span class="column">
+      {{ dateFor(build.created_at) }}
+    </span>
+    <span class="column icons">
+      <hab-icon [symbol]="iconFor(build.state)" class="status {{ build.state | lowercase }}" title="{{ build.state | titlecase }}"></hab-icon>
+      <hab-icon symbol="chevron-right"></hab-icon>
+    </span>
+  </li>
+</ol>
