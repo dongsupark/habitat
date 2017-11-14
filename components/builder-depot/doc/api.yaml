@@ -1,0 +1,81 @@
+swagger: "2.0"
+info:
+  title: Builder Depot API
+  description: This is a rad description of the Builder API
+  version: 1.0.0
+
+host: bldr.habitat.sh
+basePath: /v1/depot
+schemes:
+  - https
+
+securityDefinitions:
+  bearer:
+    type: apiKey
+    in: header
+    name: Authorization
+
+definitions:
+  Origin:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+        example: "haha"
+      owner_id:
+        type: string
+      private_key_name:
+        type: string
+      default_package_visibility:
+        type: string
+    required:
+      - id
+      - name
+
+paths:
+  /origins:
+    post:
+      summary: Create a new origin
+      description: I'm not sure how this needs to be different from the summary.
+      security:
+        - bearer: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: origin
+          description: The origin to create
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+                example: haha
+      responses:
+        201:
+          description: Successfully created an origin
+          schema:
+            $ref: '#/definitions/Origin'
+  /origins/{name}:
+    get:
+      summary: Retrieve details about an origin
+      description: Still not sure what the point of this is.
+      parameters:
+        - in: path
+          name: name
+          required: true
+          type: string
+          description: The name of the origin to retrieve
+          example: haha
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successfully retrieved the details of an origin
+          schema:
+            $ref: '#/definitions/Origin'
