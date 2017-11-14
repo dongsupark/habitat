@@ -5,6 +5,8 @@ PGPASSWORD=$(cat /hab/svc/builder-datastore/config/pwfile)
 
 mkdir -p /hab/svc/builder-api
 cat <<EOT > /hab/svc/builder-api/user.toml
+key_dir = "/hab/svc/builder-api/files"
+
 [github]
 url = "$GITHUB_API_URL"
 web_url = "$GITHUB_WEB_URL"
@@ -21,7 +23,6 @@ friends_only     = false
 source_code_url  = "https://github.com/habitat-sh/habitat"
 tutorials_url    = "https://www.habitat.sh/tutorials"
 www_url          = "http://$APP_HOSTNAME/#/sign-in"
-
 EOT
 
 mkdir -p /hab/svc/builder-api-proxy
@@ -38,11 +39,15 @@ EOT
 
 mkdir -p /hab/svc/builder-jobsrv
 cat <<EOT > /hab/svc/builder-jobsrv/user.toml
+key_dir = "/hab/svc/builder-jobsrv/files"
+
 [datastore]
 password = "$PGPASSWORD"
+database = "builder_jobsrv"
 
 [archive]
 backend = "local"
+local_dir = "/hab/svc/builder-jobsrv/data"
 EOT
 
 mkdir -p /hab/svc/builder-originsrv
@@ -181,6 +186,7 @@ shards = [
 
 [datastore]
 password = "$PGPASSWORD"
+database = "builder_originsrv"
 EOT
 
 mkdir -p /hab/svc/builder-sessionsrv
@@ -319,6 +325,7 @@ shards = [
 
 [datastore]
 password = "$PGPASSWORD"
+database = "builder_sessionsrv"
 
 [permissions]
 admin_team = $GITHUB_ADMIN_TEAM
@@ -338,6 +345,8 @@ auth_token = "${HAB_AUTH_TOKEN}"
 auto_publish = true
 log_level = "debug"
 airlock_enabled = false
+data_path = "/hab/svc/builder-worker/data"
+bldr_url = "http://localhost:9636"
 
 [github]
 url = "$GITHUB_API_URL"

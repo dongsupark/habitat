@@ -8,6 +8,7 @@ sudo -E apt-get install -y --no-install-recommends \
   ca-certificates \
   cmake \
   curl \
+  direnv \
   file \
   gdb \
   httpie \

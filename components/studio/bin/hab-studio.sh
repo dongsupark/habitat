@@ -1084,13 +1084,13 @@ unmount_filesystems() {
   # fun and stuff.
 
   if $bb mount | $bb grep -q "on $HAB_STUDIO_ROOT/src type"; then
-    $bb umount $v -l $HAB_STUDIO_ROOT/src
+    $bb umount $v -lf $HAB_STUDIO_ROOT/src
   fi
 
   local studio_artifact_path
   studio_artifact_path="${HAB_STUDIO_ROOT}${HAB_CACHE_ARTIFACT_PATH}"
   if $bb mount | $bb grep -q "on $studio_artifact_path type"; then
-    $bb umount $v -l $studio_artifact_path
+    $bb umount $v -lf $studio_artifact_path
   fi
 
   if $bb mount | $bb grep -q "on $HAB_STUDIO_ROOT/run type"; then
@@ -1098,23 +1098,23 @@ unmount_filesystems() {
   fi
 
   if $bb mount | $bb grep -q "on $HAB_STUDIO_ROOT/sys type"; then
-    $bb umount $v -l $HAB_STUDIO_ROOT/sys
+    $bb umount $v -lf $HAB_STUDIO_ROOT/sys
   fi
 
   if $bb mount | $bb grep -q "on $HAB_STUDIO_ROOT/proc type"; then
-    $bb umount $v $HAB_STUDIO_ROOT/proc
+    $bb umount $v -lf $HAB_STUDIO_ROOT/proc
   fi
 
   if $bb mount | $bb grep -q "on $HAB_STUDIO_ROOT/dev/pts type"; then
-    $bb umount $v $HAB_STUDIO_ROOT/dev/pts
+    $bb umount $v -lf $HAB_STUDIO_ROOT/dev/pts
   fi
 
   if $bb mount | $bb grep -q "on $HAB_STUDIO_ROOT/dev type"; then
-    $bb umount $v -l $HAB_STUDIO_ROOT/dev
+    $bb umount $v -lf $HAB_STUDIO_ROOT/dev
   fi
 
   if $bb mount | $bb grep -q "on $HAB_STUDIO_ROOT/var/run/docker.sock type"; then
-    $bb umount $v -l $HAB_STUDIO_ROOT/var/run/docker.sock
+    $bb umount $v -lf $HAB_STUDIO_ROOT/var/run/docker.sock
   fi
 }
 
